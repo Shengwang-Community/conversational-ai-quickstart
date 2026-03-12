@@ -28,16 +28,6 @@ export async function getConfig(): Promise<GetConfigResponse> {
 export async function startAgent(channelName: string, rtcUid: string, userUid: string): Promise<string> {
   const payload = { channelName, rtcUid, userUid }
 
-  // Debug: Log the request payload
-  console.log('🔍 startAgent Request:', {
-    url: `${API_BASE_URL}/v2/startAgent`,
-    method: 'POST',
-    payload: payload,
-    curl: `curl -X POST ${window.location.origin}${API_BASE_URL}/v2/startAgent \\
-  -H "Content-Type: application/json" \\
-  -d '${JSON.stringify(payload, null, 2)}'`,
-  })
-
   const response = await fetch(`${API_BASE_URL}/v2/startAgent`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
