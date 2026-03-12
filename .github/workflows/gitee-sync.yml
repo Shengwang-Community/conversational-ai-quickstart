@@ -14,7 +14,7 @@ jobs:
       - name: Gitee sync repo
         uses: xgfd3/hub-mirror-action@v1.4
         with:
-          src: github/AgoraIO-Community
+          src: github/Shengwang-Community
           dst: gitee/agoraio-community
           white_list: "conversational-ai-quickstart"
           static_list: "conversational-ai-quickstart"
