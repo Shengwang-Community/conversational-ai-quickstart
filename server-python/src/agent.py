@@ -27,7 +27,7 @@ class Agent:
             raise ValueError("APP_ID and APP_CERTIFICATE are required")
         
         self.client = Agora(
-            area=Area.US,
+            area=Area.CN,
             app_id=self.app_id,
             app_certificate=self.app_certificate,
         )
@@ -63,12 +63,12 @@ class Agent:
             greeting="Hello! I am your AI assistant. How can I help you?",
             failure_message="I'm sorry, I'm having trouble processing your request.",
             advanced_features={"enable_rtm": True},
-            parameters={"data_channel": "rtm"},
+            parameters={"data_channel": "rtm", "enable_error_message": True},
         )
         
         agora_agent = (
             agora_agent
-            .with_llm(OpenAI(api_key=llm_api_key, model="gpt-4o-mini"))
+            .with_llm(OpenAI(api_key=llm_api_key, model="deepseek-chat", base_url="https://api.deepseek.com/v1/chat/completions"))
             .with_tts(ElevenLabsTTS(key=tts_api_key, voice_id=voice_id, model_id=model_id))
             .with_stt(DeepgramSTT(api_key=asr_api_key, language="en-US"))
         )
@@ -77,7 +77,7 @@ class Agent:
             client=self.client,
             channel=channel_name,
             agent_uid=str(agent_uid),
-            remote_uids=[str(user_uid)],
+            remote_uids=["*"],
             enable_string_uid=True,
             idle_timeout=120,
         )
