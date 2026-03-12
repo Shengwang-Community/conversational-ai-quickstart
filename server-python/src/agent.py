@@ -68,7 +68,7 @@ class Agent:
         
         agora_agent = (
             agora_agent
-            .with_llm(OpenAI(api_key=llm_api_key, model="deepseek-chat", base_url="https://api.deepseek.com/v1/chat/completions"))
+            .with_llm(OpenAI(api_key=llm_api_key, model="gpt-4o-mini"))
             .with_tts(ElevenLabsTTS(key=tts_api_key, voice_id=voice_id, model_id=model_id))
             .with_stt(DeepgramSTT(api_key=asr_api_key, language="en-US"))
         )
