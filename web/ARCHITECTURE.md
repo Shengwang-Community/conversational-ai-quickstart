@@ -53,7 +53,7 @@ A web demo showcasing quick integration of Agora Conversational AI, featuring re
 │       └── utils.ts         # Common utility functions
 │
 ├── proxy.ts                 # Next.js 16 API proxy (replaces middleware)
-├── ../server-python/        # Backend service (project root level)
+├── ../server/               # Backend service (project root level)
 │   ├── src/
 │   │   ├── server.py        # FastAPI entry, route definitions
 │   │   └── agent.py         # Agent class using agora-agent-server-sdk
@@ -162,7 +162,7 @@ User Action → useAgoraConnection hook → Agora SDK (agora-rtc-react)
 ### Python Service (FastAPI)
 
 ```
-../server-python/
+../server/
 ├── src/
 │   ├── server.py        # FastAPI app, routes, CORS
 │   └── agent.py         # Agent start/stop logic
@@ -171,7 +171,7 @@ User Action → useAgoraConnection hook → Agora SDK (agora-rtc-react)
 
 ### Environment Variables
 
-Backend reads configuration from `server-python/.env.local`:
+Backend reads configuration from `server/.env.local`:
 
 | Variable | Description |
 |----------|-------------|

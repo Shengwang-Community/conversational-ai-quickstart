@@ -42,5 +42,5 @@ See [AGENTS.md - Key Constraints](./AGENTS.md#key-constraints) for details:
 | [AGENTS.md](./AGENTS.md) | AI workflow + project specs | AI Agents |
 | [ARCHITECTURE.md](./ARCHITECTURE.md) | Technical architecture | Developers |
 | [README.md](./README.md) | User guide | End users |
-| `../server-python/AGENTS.md` | Backend-specific rules | AI Agents |
-| `../server-python/README.md` | Backend setup | Developers |
+| `../server/AGENTS.md` | Backend-specific rules | AI Agents |
+| `../server/README.md` | Backend setup | Developers |

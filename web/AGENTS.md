@@ -272,7 +272,7 @@ bun lint         # Run Biome lint
 
 **Backend** (from project root):
 ```bash
-cd ../server-python
+cd ../server
 python3 src/server.py    # Start Python service on port 8000
 ```
 

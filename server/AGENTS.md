@@ -97,7 +97,7 @@ curl -X POST http://localhost:8000/v2/stopAgent \
 ## Project Structure
 
 ```
-server-python/
+server/
 ├── src/
 │   ├── server.py          # FastAPI app, HTTP endpoints
 │   └── agent.py           # Agent lifecycle management

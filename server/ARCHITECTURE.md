@@ -22,7 +22,7 @@ Python FastAPI service providing REST APIs for Agora Conversational AI Agent man
 ## Project Structure
 
 ```
-server-python/
+server/
 ├── src/
 │   ├── server.py           # FastAPI app, routes, CORS
 │   └── agent.py            # Agent lifecycle management
