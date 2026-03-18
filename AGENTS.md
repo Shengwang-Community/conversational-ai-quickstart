@@ -12,8 +12,8 @@ A real-time voice conversation application with AI agents, built with:
 
 ```
 .
-├── web-client/           # Frontend application (Next.js + React)
-└── server-python/        # Backend service (FastAPI + Agora Agent SDK)
+├── web/                  # Frontend application (Next.js + React)
+└── server/               # Backend service (FastAPI + Agora Agent SDK)
 ```
 
 ## Quick Start
@@ -34,14 +34,14 @@ bun run backend
 
 ## Module-Specific Guides
 
-### Frontend (web-client/)
-- [web-client/AGENTS.md](./web-client/AGENTS.md) — AI assistant guide for frontend development
-- [web-client/ARCHITECTURE.md](./web-client/ARCHITECTURE.md) — Detailed frontend architecture
+### Frontend (web/)
+- [web/AGENTS.md](./web/AGENTS.md) — AI assistant guide for frontend development
+- [web/ARCHITECTURE.md](./web/ARCHITECTURE.md) — Detailed frontend architecture
 
-### Backend (server-python/)
-- [server-python/AGENTS.md](./server-python/AGENTS.md) — AI assistant guide for backend development
-- [server-python/ARCHITECTURE.md](./server-python/ARCHITECTURE.md) — Backend architecture details
-- [server-python/README.md](./server-python/README.md) — Backend API documentation
+### Backend (server/)
+- [server/AGENTS.md](./server/AGENTS.md) — AI assistant guide for backend development
+- [server/ARCHITECTURE.md](./server/ARCHITECTURE.md) — Backend architecture details
+- [server/README.md](./server/README.md) — Backend API documentation
 
 ### System Architecture
 - [ARCHITECTURE.md](./ARCHITECTURE.md) — Overall system architecture and data flow
@@ -59,14 +59,14 @@ bun run backend
 ## Common Development Tasks
 
 ### Working on Frontend
-See [web-client/AGENTS.md](./web-client/AGENTS.md) for:
+See [web/AGENTS.md](./web/AGENTS.md) for:
 - UI component development
 - State management patterns (Zustand)
 - Agora SDK integration (RTC/RTM)
 - API client usage
 
 ### Working on Backend
-See [server-python/AGENTS.md](./server-python/AGENTS.md) for:
+See [server/AGENTS.md](./server/AGENTS.md) for:
 - API endpoint development
 - Agent lifecycle management (start/stop via AgentSession)
 - Token generation (`generate_convo_ai_token`)
@@ -81,7 +81,7 @@ See [server-python/AGENTS.md](./server-python/AGENTS.md) for:
 ## Important Notes
 
 - Never commit `.env.local` or credentials
-- Frontend proxies `/api/*` requests to backend via `web-client/proxy.ts`
+- Frontend proxies `/api/*` requests to backend via `web/proxy.ts`
 - Agent lifecycle is managed by backend (AgentSession), not frontend
 - All Agora SDK calls go through `useAgoraConnection.ts` hook on the frontend
 - Authentication uses Token007 (AccessToken2) — only `APP_ID` and `APP_CERTIFICATE` are needed

@@ -16,7 +16,7 @@ Real-time voice conversation with AI agents, featuring live transcription and lo
 bun install
 
 # 2. Configure backend
-cd server-python
+cd server
 cp .env.example .env.local
 # Edit .env.local with your credentials (see Configuration below)
 
@@ -32,7 +32,7 @@ Services will be available at:
 
 ## Configuration
 
-Edit `server-python/.env.local`:
+Edit `server/.env.local`:
 
 ```bash
 # Agora Credentials (required)
@@ -68,8 +68,8 @@ bun run clean        # Clean build artifacts and venvs
 
 ```
 .
-├── web-client/       # Frontend — Next.js 16 + React 19 + TypeScript + Agora Web SDK
-├── server-python/    # Backend — Python FastAPI + Agora Agent SDK
+├── web/              # Frontend — Next.js 16 + React 19 + TypeScript + Agora Web SDK
+├── server/           # Backend — Python FastAPI + Agora Agent SDK
 ├── ARCHITECTURE.md   # System architecture and data flow
 └── AGENTS.md         # AI agent development guide
 ```
@@ -81,14 +81,14 @@ bun run clean        # Clean build artifacts and venvs
 | Connection issues | Backend running on port 8000? |
 | Auth errors | `APP_ID` and `APP_CERTIFICATE` correct in `.env.local`? |
 | Agent fails to start | AI provider API keys valid? Check logs at http://localhost:8000/docs |
-| Frontend can't reach backend | Proxy config in `web-client/proxy.ts` |
+| Frontend can't reach backend | Proxy config in `web/proxy.ts` |
 
 ## Documentation
 
 - [ARCHITECTURE.md](./ARCHITECTURE.md) — System architecture and data flow
 - [AGENTS.md](./AGENTS.md) — AI agent development guide
-- [web-client/](./web-client/) — Frontend details
-- [server-python/](./server-python/) — Backend details
+- [web/](./web/) — Frontend details
+- [server/](./server/) — Backend details
 
 ## License
 

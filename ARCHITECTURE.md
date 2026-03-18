@@ -71,7 +71,7 @@ Frontend: POST /api/v2/stopAgent { agentId }
 | `/v2/startAgent` | POST | Start AI agent |
 | `/v2/stopAgent` | POST | Stop agent by agent_id |
 
-Frontend calls these as `/api/*`, proxied to backend via `web-client/proxy.ts`.
+Frontend calls these as `/api/*`, proxied to backend via `web/proxy.ts`.
 
 ## Authentication
 
@@ -79,7 +79,7 @@ Token007 (AccessToken2) — generated from `APP_ID` + `APP_CERTIFICATE` only. No
 
 ## Detailed Documentation
 
-- [web-client/ARCHITECTURE.md](./web-client/ARCHITECTURE.md) — Frontend architecture, components, state management
-- [server-python/ARCHITECTURE.md](./server-python/ARCHITECTURE.md) — Backend architecture, endpoints, AI provider config
+- [web/ARCHITECTURE.md](./web/ARCHITECTURE.md) — Frontend architecture, components, state management
+- [server/ARCHITECTURE.md](./server/ARCHITECTURE.md) — Backend architecture, endpoints, AI provider config
 - [AGENTS.md](./AGENTS.md) — AI agent development guide
 - [README.md](./README.md) — Quick start, configuration, deployment
