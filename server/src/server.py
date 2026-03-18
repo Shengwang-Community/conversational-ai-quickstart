@@ -20,7 +20,7 @@ load_dotenv(os.path.join(_base_dir, '.env'))
 from fastapi import FastAPI, APIRouter, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from agora_agent.agentkit.token import generate_convo_ai_token
+from shengwang_agent.agentkit.token import generate_convo_ai_token
 from agent import Agent
 
 def _to_http_error(exc: Exception) -> HTTPException:
