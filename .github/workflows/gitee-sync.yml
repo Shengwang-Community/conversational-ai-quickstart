@@ -1,6 +1,9 @@
 name: gitee-sync
 on:
-  pull_request:
+  push:
+    branches:
+      - main
+      - master
   workflow_dispatch:
 jobs:
   build:
