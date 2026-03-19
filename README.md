@@ -7,7 +7,7 @@ Real-time voice conversation with AI agents, featuring live transcription and lo
 - [Bun](https://bun.sh/) (package manager & script runner)
 - Python 3.8+
 - [Agora Account](https://console.agora.io/) with App ID & App Certificate
-- API keys for: [OpenAI](https://platform.openai.com/), [ElevenLabs](https://elevenlabs.io/), [Deepgram](https://deepgram.com/)
+- API keys for: [DeepSeek](https://platform.deepseek.com/), [MiniMax](https://platform.minimaxi.com/), [Microsoft Azure Speech](https://azure.microsoft.com/en-us/products/ai-services/speech-to-text)
 
 ## Quick Start
 
@@ -40,13 +40,17 @@ APP_ID=your_agora_app_id
 APP_CERTIFICATE=your_agora_app_certificate
 
 # AI Service Providers (required)
-ASR_DEEPGRAM_API_KEY=your_deepgram_api_key
-LLM_API_KEY=your_openai_api_key
-TTS_ELEVENLABS_API_KEY=your_elevenlabs_api_key
+LLM_API_KEY=your_llm_api_key
+LLM_URL=your_llm_url
+LLM_MODEL=your_llm_model
+STT_MICROSOFT_KEY=your_microsoft_key
+STT_MICROSOFT_REGION=chinaeast2
+TTS_MINIMAX_KEY=your_minimax_key
+TTS_MINIMAX_MODEL=speech-01-turbo
+TTS_MINIMAX_VOICE_ID=male-qn-qingse
+TTS_MINIMAX_GROUP_ID=your_minimax_group_id
 
 # Optional
-TTS_ELEVENLABS_VOICE_ID=pNInz6obpgDQGcFmaJgB
-TTS_ELEVENLABS_MODEL_ID=eleven_turbo_v2
 PORT=8000
 ```
 

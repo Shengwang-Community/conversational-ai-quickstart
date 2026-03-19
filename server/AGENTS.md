@@ -9,12 +9,12 @@ This document is designed for AI programming assistants to understand and work w
 **Tech Stack:**
 - Python 3.8+
 - FastAPI (web framework)
-- agora-agent-server-sdk (Agora Agent SDK)
+- agora-agent-server-sdk (Agora Agent SDK, pip: `agent-server-sdk`, module: `shengwang_agent`)
 - uvicorn (ASGI server)
 
 **Architecture:**
 ```
-HTTP Request → FastAPI (server.py) → Agent (agent.py) → agora-agent-server-sdk → Agora API
+HTTP Request → FastAPI (server.py) → Agent (agent.py) → agent-server-sdk → Agora API
 ```
 
 **Key Components:**
@@ -90,9 +90,11 @@ curl -X POST http://localhost:8000/v2/stopAgent \
 
 ### API Keys Required
 - `APP_ID`, `APP_CERTIFICATE` - Agora credentials (required)
-- `LLM_API_KEY` - LLM API key (required)
-- `TTS_ELEVENLABS_API_KEY` - ElevenLabs API key (required)
-- `ASR_DEEPGRAM_API_KEY` - Deepgram API key (required)
+- `LLM_API_KEY` - DeepSeek API key (required)
+- `STT_MICROSOFT_KEY` - Microsoft Azure Speech key (required)
+- `STT_MICROSOFT_REGION` - Azure region, e.g. `chinaeast2` (required)
+- `TTS_MINIMAX_KEY` - MiniMax API key (required)
+- `TTS_MINIMAX_GROUP_ID` - MiniMax Group ID (required)
 
 ## Project Structure
 
@@ -112,12 +114,12 @@ server/
 
 ### Agent Configuration Pattern
 ```python
-from agora_agent import Agora, Area
-from agora_agent.agentkit import Agent as AgoraAgent
-from agora_agent.agentkit.vendors import OpenAI, ElevenLabsTTS, DeepgramSTT
+from shengwang_agent import AgentClient, Area
+from shengwang_agent.agentkit import Agent as AgoraAgent
+from shengwang_agent.agentkit.vendors import DeepSeekLLM, MicrosoftSTT, MiniMaxTTS
 
 # Create Agora client (Token007 auth from APP_ID + APP_CERTIFICATE)
-client = Agora(area=Area.CN, app_id=app_id, app_certificate=app_certificate)
+client = AgentClient(area=Area.CN, app_id=app_id, app_certificate=app_certificate)
 
 # Create agent with fluent API
 agora_agent = AgoraAgent(
@@ -130,9 +132,9 @@ agora_agent = AgoraAgent(
 
 agora_agent = (
     agora_agent
-    .with_llm(OpenAI(api_key=key, model="gpt-4o-mini"))
-    .with_tts(ElevenLabsTTS(key=key, voice_id=voice_id, model_id=model_id))
-    .with_stt(DeepgramSTT(api_key=key, language="en-US"))
+    .with_llm(DeepSeekLLM(url="https://api.deepseek.com/v1/chat/completions", api_key=key, model="deepseek-chat"))
+    .with_tts(MiniMaxTTS(key=key, model="speech-01-turbo", voice_setting={"voice_id": "male-qn-qingse", "speed": 1.0}, group_id=group_id))
+    .with_stt(MicrosoftSTT(key=key, region="chinaeast2", language="zh-CN"))
 )
 
 session = agora_agent.create_session(
@@ -159,7 +161,7 @@ except RuntimeError as e:
 
 ### Token Generation
 ```python
-from agora_agent.agentkit.token import generate_convo_ai_token
+from shengwang_agent.agentkit.token import generate_convo_ai_token
 
 token = generate_convo_ai_token(
     app_id=app_id,
@@ -175,14 +177,14 @@ token = generate_convo_ai_token(
 ### Core
 - `fastapi>=0.100.0` - Web framework
 - `uvicorn>=0.20.0` - ASGI server
-- `agora-agent-server-sdk` - Agora Agent SDK
+- `agora-agent-server-sdk` - Agora Agent SDK (pip: `agent-server-sdk`, module: `shengwang_agent`)
 - `python-dotenv>=1.0.0` - Environment management
 
 ## Troubleshooting
 
 ### Import Errors
-**Symptom:** `ModuleNotFoundError: No module named 'agora_agent'`
-**Solution:** Ensure `agora-agent-server-sdk` is installed: `pip install -r requirements.txt`
+**Symptom:** `ModuleNotFoundError: No module named 'shengwang_agent'`
+**Solution:** Ensure `agent-server-sdk` is installed: `pip install -r requirements.txt`
 
 ### Configuration Errors
 **Symptom:** Service fails to start with ValueError

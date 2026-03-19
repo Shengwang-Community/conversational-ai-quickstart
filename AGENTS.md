@@ -51,10 +51,10 @@ bun run backend
 | Layer | Technologies |
 |-------|-------------|
 | Frontend | Next.js 16, React 19, TypeScript, Agora Web SDK (RTC + RTM), agora-agent-client-toolkit, Zustand, Tailwind CSS |
-| Backend | Python 3.8+, FastAPI, agora-agent-server-sdk, uvicorn |
+| Backend | Python 3.8+, FastAPI, agent-server-sdk (shengwang_agent), uvicorn |
 | Auth | Token007 (AccessToken2) — auto-generated from APP_ID + APP_CERTIFICATE |
 | Real-time | Agora RTC (audio) + RTM (messaging/transcription) |
-| AI Providers | Deepgram (ASR), OpenAI (LLM), ElevenLabs (TTS) |
+| AI Providers | Microsoft (ASR), DeepSeek (LLM), MiniMax (TTS) |
 
 ## Common Development Tasks
 
@@ -85,7 +85,7 @@ See [server/AGENTS.md](./server/AGENTS.md) for:
 - Agent lifecycle is managed by backend (AgentSession), not frontend
 - All Agora SDK calls go through `useAgoraConnection.ts` hook on the frontend
 - Authentication uses Token007 (AccessToken2) — only `APP_ID` and `APP_CERTIFICATE` are needed
-- Backend uses `Agora(area=Area.US, ...)` client with auto Token007 auth
+- Backend uses `AgentClient(area=Area.CN, ...)` client with auto Token007 auth
 
 ## Reference Documentation
 
