@@ -15,8 +15,10 @@ Edit `.env.local` and fill in your API keys:
 - `APP_ID` - Your Agora App ID (Required)
 - `APP_CERTIFICATE` - Your Agora App Certificate (Required)
 - `LLM_API_KEY` - Your LLM API Key (Required)
-- `TTS_ELEVENLABS_API_KEY` - Your ElevenLabs API Key (Required)
-- `ASR_DEEPGRAM_API_KEY` - Your Deepgram API Key (Required)
+- `STT_MICROSOFT_KEY` - Your Microsoft Azure Speech Key (Required)
+- `STT_MICROSOFT_REGION` - Your Azure region, e.g. `chinaeast2` (Required)
+- `TTS_MINIMAX_KEY` - Your MiniMax API Key (Required)
+- `TTS_MINIMAX_GROUP_ID` - Your MiniMax Group ID (Required)
 
 **Note**: The service uses Token007 authentication generated from `APP_ID` and `APP_CERTIFICATE`. No API_KEY/API_SECRET needed.
 
@@ -73,8 +75,8 @@ curl -X POST http://localhost:8000/v2/stopAgent \
 
 ## SDK
 
-This project uses `agora-agent-server-sdk`:
-- Package: `agora_agent`
-- Agent builder: `agora_agent.agentkit.Agent` with fluent `.with_llm()` / `.with_tts()` / `.with_stt()` API
-- Vendors: `OpenAI`, `ElevenLabsTTS`, `DeepgramSTT` from `agora_agent.agentkit.vendors`
-- Token: `agora_agent.agentkit.token.generate_convo_ai_token`
+This project uses `agent-server-sdk`:
+- Package: `shengwang_agent`
+- Agent builder: `shengwang_agent.agentkit.Agent` with fluent `.with_llm()` / `.with_tts()` / `.with_stt()` API
+- Vendors: `DeepSeekLLM`, `MicrosoftSTT`, `MiniMaxTTS` from `shengwang_agent.agentkit.vendors`
+- Token: `shengwang_agent.agentkit.token.generate_convo_ai_token`

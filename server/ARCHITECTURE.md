@@ -16,7 +16,7 @@ Python FastAPI service providing REST APIs for Agora Conversational AI Agent man
 | Framework | FastAPI |
 | Language | Python 3.8+ |
 | HTTP Server | Uvicorn |
-| Agent SDK | agora-agent-server-sdk |
+| Agent SDK | agent-server-sdk (shengwang_agent) |
 | Config | python-dotenv |
 
 ## Project Structure
@@ -57,7 +57,7 @@ agent = Agent()  # Singleton
 ### 2. agent.py - Agent Management Layer
 
 **Responsibilities**:
-- Wrap agora-agent-server-sdk
+- Wrap agent-server-sdk (shengwang_agent)
 - Configure ASR/LLM/TTS providers
 - Manage agent lifecycle (start/stop via AgentSession)
 - Parameter validation
@@ -65,13 +65,13 @@ agent = Agent()  # Singleton
 **Key Components**:
 
 ```python
-from agora_agent import Agora, Area
-from agora_agent.agentkit import Agent as AgoraAgent
-from agora_agent.agentkit.vendors import OpenAI, ElevenLabsTTS, DeepgramSTT
+from shengwang_agent import AgentClient, Area
+from shengwang_agent.agentkit import Agent as AgoraAgent
+from shengwang_agent.agentkit.vendors import DeepSeekLLM, MicrosoftSTT, MiniMaxTTS
 
 class Agent:
     def __init__(self):
-        self.client = Agora(
+        self.client = AgentClient(
             area=Area.CN,
             app_id=self.app_id,
             app_certificate=self.app_certificate,
@@ -87,9 +87,9 @@ class Agent:
         )
         agora_agent = (
             agora_agent
-            .with_llm(OpenAI(...))
-            .with_tts(ElevenLabsTTS(...))
-            .with_stt(DeepgramSTT(...))
+            .with_llm(DeepSeekLLM(...))
+            .with_tts(MiniMaxTTS(...))
+            .with_stt(MicrosoftSTT(...))
         )
         session = agora_agent.create_session(
             client=self.client,
@@ -183,9 +183,11 @@ Loaded from `.env.local` (priority) or `.env`:
 ```bash
 APP_ID=your_app_id                    # Agora App ID
 APP_CERTIFICATE=your_app_certificate  # Agora App Certificate
-ASR_DEEPGRAM_API_KEY=your_key        # Speech-to-Text
-LLM_API_KEY=your_key                 # Language Model
-TTS_ELEVENLABS_API_KEY=your_key      # Text-to-Speech
+LLM_API_KEY=your_key                 # DeepSeek LLM
+STT_MICROSOFT_KEY=your_key           # Microsoft Azure Speech-to-Text
+STT_MICROSOFT_REGION=chinaeast2      # Azure region
+TTS_MINIMAX_KEY=your_key             # MiniMax Text-to-Speech
+TTS_MINIMAX_GROUP_ID=your_id         # MiniMax Group ID
 PORT=8000                             # HTTP server port
 ```
 
@@ -194,7 +196,7 @@ PORT=8000                             # HTTP server port
 ### Token Generation
 
 ```python
-from agora_agent.agentkit.token import generate_convo_ai_token
+from shengwang_agent.agentkit.token import generate_convo_ai_token
 
 token = generate_convo_ai_token(
     app_id=app_id,
@@ -208,21 +210,21 @@ token = generate_convo_ai_token(
 ## Three-Tier AI Configuration
 
 ### ASR (Automatic Speech Recognition)
-**Provider**: Deepgram
+**Provider**: Microsoft Azure
 ```python
-DeepgramSTT(api_key=asr_api_key, language="en-US")
+MicrosoftSTT(key=stt_key, region="chinaeast2", language="zh-CN")
 ```
 
 ### LLM (Large Language Model)
-**Provider**: OpenAI (configurable)
+**Provider**: DeepSeek
 ```python
-OpenAI(api_key=llm_api_key, model="gpt-4o-mini")
+DeepSeekLLM(url="https://api.deepseek.com/v1/chat/completions", api_key=llm_api_key, model="deepseek-chat")
 ```
 
 ### TTS (Text-to-Speech)
-**Provider**: ElevenLabs
+**Provider**: MiniMax
 ```python
-ElevenLabsTTS(key=tts_api_key, voice_id=voice_id, model_id=model_id)
+MiniMaxTTS(key=tts_key, model="speech-01-turbo", voice_setting={"voice_id": "male-qn-qingse", "speed": 1.0}, group_id=group_id)
 ```
 
 ## Data Flow
@@ -234,7 +236,7 @@ FastAPI Router (server.py)
     ↓
 Agent Class (agent.py)
     ↓
-agora-agent-server-sdk (AgentSession)
+agent-server-sdk (AgentSession)
     ↓
 Agora REST API
     ↓
@@ -269,7 +271,7 @@ Frontend connects via Next.js proxy (`proxy.ts`):
 fastapi>=0.100.0          # Web framework
 uvicorn>=0.20.0           # ASGI server
 python-dotenv>=1.0.0      # Environment variables
-agora-agent-server-sdk   # Agora Agent SDK
+agent-server-sdk          # Agora Agent SDK (shengwang_agent)
 ```
 
 ## Reference

@@ -40,7 +40,7 @@ User clicks "Start"
 
 ```
 Frontend: POST /api/v2/startAgent { channelName, rtcUid, userUid }
-  → Backend: Build AgoraAgent (Deepgram ASR + OpenAI LLM + ElevenLabs TTS)
+  → Backend: Build AgoraAgent (Microsoft ASR + DeepSeek LLM + MiniMax TTS)
   → Backend: session.start() → agent_id
   → Agent joins RTC channel → Frontend receives audio + RTM subtitles
 ```
@@ -49,9 +49,9 @@ Frontend: POST /api/v2/startAgent { channelName, rtcUid, userUid }
 
 ```
 User speaks → RTC audio → Agora Cloud
-  → Deepgram (ASR): audio → text
-  → OpenAI (LLM): text → response
-  → ElevenLabs (TTS): response → audio
+  → Microsoft (ASR): audio → text
+  → DeepSeek (LLM): text → response
+  → MiniMax (TTS): response → audio
   → RTC audio + RTM subtitles → Frontend
 ```
 
